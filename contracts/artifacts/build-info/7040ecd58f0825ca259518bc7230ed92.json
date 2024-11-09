@@ -1,0 +1,1569 @@
+{
+	"id": "7040ecd58f0825ca259518bc7230ed92",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.26",
+	"solcLongVersion": "0.8.26+commit.8a97fa7a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/BankAccount.sol": {
+				"content": "// SPDX-License-Identifier: GPL-3.0\r\n\r\npragma solidity >=0.8.2 <0.9.0;\r\n\r\ncontract BankAccount {\r\n    event Deposit(address indexed user, uint indexed accountId, uint value, uint timestamp);\r\n    event WithdrawRequested(address indexed user, uint256 indexed accountId, uint256 indexed withdrawId, uint256 amount, uint256 timestamp);\r\n    event Withdraw (uint indexed withdrawId, uint timestamp);\r\n    event AccountCreated(address[] owners, uint indexed id, uint timestamp);\r\n\r\n    struct WithdrawRequest {\r\n        address user;\r\n        uint amount;\r\n        uint approvals;\r\n        mapping(address => bool) ownersApproved;\r\n        bool approved;\r\n    }\r\n\r\n    struct Account {\r\n        address[] owners;\r\n        uint balance;\r\n        mapping(uint => WithdrawRequest) withdrawRequests;\r\n    }\r\n\r\n    mapping(uint => Account) account;\r\n    mapping(address => uint[]) userAccounts;\r\n\r\n    uint nextAccountId;\r\n    uint nextWithdrawId;\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/BankAccount.sol": {
+				"BankAccount": {
+					"abi": [
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "address[]",
+									"name": "owners",
+									"type": "address[]"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "id",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "timestamp",
+									"type": "uint256"
+								}
+							],
+							"name": "AccountCreated",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "user",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "accountId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "value",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "timestamp",
+									"type": "uint256"
+								}
+							],
+							"name": "Deposit",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "withdrawId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "timestamp",
+									"type": "uint256"
+								}
+							],
+							"name": "Withdraw",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "address",
+									"name": "user",
+									"type": "address"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "accountId",
+									"type": "uint256"
+								},
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "withdrawId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "amount",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "timestamp",
+									"type": "uint256"
+								}
+							],
+							"name": "WithdrawRequested",
+							"type": "event"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "    /* \"contracts/BankAccount.sol\":74:940  contract BankAccount {... */\n  mstore(0x40, 0x80)\n  callvalue\n  dup1\n  iszero\n  tag_1\n  jumpi\n  0x00\n  dup1\n  revert\ntag_1:\n  pop\n  dataSize(sub_0)\n  dup1\n  dataOffset(sub_0)\n  0x00\n  codecopy\n  0x00\n  return\nstop\n\nsub_0: assembly {\n        /* \"contracts/BankAccount.sol\":74:940  contract BankAccount {... */\n      mstore(0x40, 0x80)\n      0x00\n      dup1\n      revert\n\n    auxdata: 0xa2646970667358221220c147613d4b98cf4f32319343af6c4cc71c0a9251336a51d814910561da7e102d64736f6c634300081a0033\n}\n",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "6080604052348015600e575f80fd5b50603e80601a5f395ff3fe60806040525f80fdfea2646970667358221220c147613d4b98cf4f32319343af6c4cc71c0a9251336a51d814910561da7e102d64736f6c634300081a0033",
+							"opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH1 0xE JUMPI PUSH0 DUP1 REVERT JUMPDEST POP PUSH1 0x3E DUP1 PUSH1 0x1A PUSH0 CODECOPY PUSH0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE PUSH0 DUP1 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xC1 SELFBALANCE PUSH2 0x3D4B SWAP9 0xCF 0x4F ORIGIN BALANCE SWAP4 NUMBER 0xAF PUSH13 0x4CC71C0A9251336A51D8149105 PUSH2 0xDA7E LT 0x2D PUSH5 0x736F6C6343 STOP ADDMOD BYTE STOP CALLER ",
+							"sourceMap": "74:866:0:-:0;;;;;;;;;;;;;;;;;;;"
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "60806040525f80fdfea2646970667358221220c147613d4b98cf4f32319343af6c4cc71c0a9251336a51d814910561da7e102d64736f6c634300081a0033",
+							"opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH0 DUP1 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xC1 SELFBALANCE PUSH2 0x3D4B SWAP9 0xCF 0x4F ORIGIN BALANCE SWAP4 NUMBER 0xAF PUSH13 0x4CC71C0A9251336A51D8149105 PUSH2 0xDA7E LT 0x2D PUSH5 0x736F6C6343 STOP ADDMOD BYTE STOP CALLER ",
+							"sourceMap": "74:866:0:-:0;;;;;"
+						},
+						"gasEstimates": {
+							"creation": {
+								"codeDepositCost": "12400",
+								"executionCost": "64",
+								"totalCost": "12464"
+							}
+						},
+						"legacyAssembly": {
+							".code": [
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "PUSH",
+									"source": 0,
+									"value": "80"
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "PUSH",
+									"source": 0,
+									"value": "40"
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "MSTORE",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "CALLVALUE",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "DUP1",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "ISZERO",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "PUSH [tag]",
+									"source": 0,
+									"value": "1"
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "JUMPI",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "PUSH",
+									"source": 0,
+									"value": "0"
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "DUP1",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "REVERT",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "tag",
+									"source": 0,
+									"value": "1"
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "JUMPDEST",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "POP",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "PUSH #[$]",
+									"source": 0,
+									"value": "0000000000000000000000000000000000000000000000000000000000000000"
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "DUP1",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "PUSH [$]",
+									"source": 0,
+									"value": "0000000000000000000000000000000000000000000000000000000000000000"
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "PUSH",
+									"source": 0,
+									"value": "0"
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "CODECOPY",
+									"source": 0
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "PUSH",
+									"source": 0,
+									"value": "0"
+								},
+								{
+									"begin": 74,
+									"end": 940,
+									"name": "RETURN",
+									"source": 0
+								}
+							],
+							".data": {
+								"0": {
+									".auxdata": "a2646970667358221220c147613d4b98cf4f32319343af6c4cc71c0a9251336a51d814910561da7e102d64736f6c634300081a0033",
+									".code": [
+										{
+											"begin": 74,
+											"end": 940,
+											"name": "PUSH",
+											"source": 0,
+											"value": "80"
+										},
+										{
+											"begin": 74,
+											"end": 940,
+											"name": "PUSH",
+											"source": 0,
+											"value": "40"
+										},
+										{
+											"begin": 74,
+											"end": 940,
+											"name": "MSTORE",
+											"source": 0
+										},
+										{
+											"begin": 74,
+											"end": 940,
+											"name": "PUSH",
+											"source": 0,
+											"value": "0"
+										},
+										{
+											"begin": 74,
+											"end": 940,
+											"name": "DUP1",
+											"source": 0
+										},
+										{
+											"begin": 74,
+											"end": 940,
+											"name": "REVERT",
+											"source": 0
+										}
+									]
+								}
+							},
+							"sourceList": [
+								"contracts/BankAccount.sol",
+								"#utility.yul"
+							]
+						},
+						"methodIdentifiers": {}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.26+commit.8a97fa7a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"AccountCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"accountId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"withdrawId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"Withdraw\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"accountId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"withdrawId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"WithdrawRequested\",\"type\":\"event\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/BankAccount.sol\":\"BankAccount\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/BankAccount.sol\":{\"keccak256\":\"0xbad50518565fb8d7719f583f875a4a0bcafa5dbe0fc3eeb5382cb564559d7734\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://b2f9dbfb728481385d5cc320edb296c61fe426de84956b682bfc4c4dc178af9d\",\"dweb:/ipfs/QmdYM9RyPyHqpF7GvUdSRPMqGhxPaoZd8L94A51btupUep\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [
+							{
+								"astId": 67,
+								"contract": "contracts/BankAccount.sol:BankAccount",
+								"label": "account",
+								"offset": 0,
+								"slot": "0",
+								"type": "t_mapping(t_uint256,t_struct(Account)62_storage)"
+							},
+							{
+								"astId": 72,
+								"contract": "contracts/BankAccount.sol:BankAccount",
+								"label": "userAccounts",
+								"offset": 0,
+								"slot": "1",
+								"type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)"
+							},
+							{
+								"astId": 74,
+								"contract": "contracts/BankAccount.sol:BankAccount",
+								"label": "nextAccountId",
+								"offset": 0,
+								"slot": "2",
+								"type": "t_uint256"
+							},
+							{
+								"astId": 76,
+								"contract": "contracts/BankAccount.sol:BankAccount",
+								"label": "nextWithdrawId",
+								"offset": 0,
+								"slot": "3",
+								"type": "t_uint256"
+							}
+						],
+						"types": {
+							"t_address": {
+								"encoding": "inplace",
+								"label": "address",
+								"numberOfBytes": "20"
+							},
+							"t_array(t_address)dyn_storage": {
+								"base": "t_address",
+								"encoding": "dynamic_array",
+								"label": "address[]",
+								"numberOfBytes": "32"
+							},
+							"t_array(t_uint256)dyn_storage": {
+								"base": "t_uint256",
+								"encoding": "dynamic_array",
+								"label": "uint256[]",
+								"numberOfBytes": "32"
+							},
+							"t_bool": {
+								"encoding": "inplace",
+								"label": "bool",
+								"numberOfBytes": "1"
+							},
+							"t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+								"encoding": "mapping",
+								"key": "t_address",
+								"label": "mapping(address => uint256[])",
+								"numberOfBytes": "32",
+								"value": "t_array(t_uint256)dyn_storage"
+							},
+							"t_mapping(t_address,t_bool)": {
+								"encoding": "mapping",
+								"key": "t_address",
+								"label": "mapping(address => bool)",
+								"numberOfBytes": "32",
+								"value": "t_bool"
+							},
+							"t_mapping(t_uint256,t_struct(Account)62_storage)": {
+								"encoding": "mapping",
+								"key": "t_uint256",
+								"label": "mapping(uint256 => struct BankAccount.Account)",
+								"numberOfBytes": "32",
+								"value": "t_struct(Account)62_storage"
+							},
+							"t_mapping(t_uint256,t_struct(WithdrawRequest)51_storage)": {
+								"encoding": "mapping",
+								"key": "t_uint256",
+								"label": "mapping(uint256 => struct BankAccount.WithdrawRequest)",
+								"numberOfBytes": "32",
+								"value": "t_struct(WithdrawRequest)51_storage"
+							},
+							"t_struct(Account)62_storage": {
+								"encoding": "inplace",
+								"label": "struct BankAccount.Account",
+								"members": [
+									{
+										"astId": 54,
+										"contract": "contracts/BankAccount.sol:BankAccount",
+										"label": "owners",
+										"offset": 0,
+										"slot": "0",
+										"type": "t_array(t_address)dyn_storage"
+									},
+									{
+										"astId": 56,
+										"contract": "contracts/BankAccount.sol:BankAccount",
+										"label": "balance",
+										"offset": 0,
+										"slot": "1",
+										"type": "t_uint256"
+									},
+									{
+										"astId": 61,
+										"contract": "contracts/BankAccount.sol:BankAccount",
+										"label": "withdrawRequests",
+										"offset": 0,
+										"slot": "2",
+										"type": "t_mapping(t_uint256,t_struct(WithdrawRequest)51_storage)"
+									}
+								],
+								"numberOfBytes": "96"
+							},
+							"t_struct(WithdrawRequest)51_storage": {
+								"encoding": "inplace",
+								"label": "struct BankAccount.WithdrawRequest",
+								"members": [
+									{
+										"astId": 40,
+										"contract": "contracts/BankAccount.sol:BankAccount",
+										"label": "user",
+										"offset": 0,
+										"slot": "0",
+										"type": "t_address"
+									},
+									{
+										"astId": 42,
+										"contract": "contracts/BankAccount.sol:BankAccount",
+										"label": "amount",
+										"offset": 0,
+										"slot": "1",
+										"type": "t_uint256"
+									},
+									{
+										"astId": 44,
+										"contract": "contracts/BankAccount.sol:BankAccount",
+										"label": "approvals",
+										"offset": 0,
+										"slot": "2",
+										"type": "t_uint256"
+									},
+									{
+										"astId": 48,
+										"contract": "contracts/BankAccount.sol:BankAccount",
+										"label": "ownersApproved",
+										"offset": 0,
+										"slot": "3",
+										"type": "t_mapping(t_address,t_bool)"
+									},
+									{
+										"astId": 50,
+										"contract": "contracts/BankAccount.sol:BankAccount",
+										"label": "approved",
+										"offset": 0,
+										"slot": "4",
+										"type": "t_bool"
+									}
+								],
+								"numberOfBytes": "160"
+							},
+							"t_uint256": {
+								"encoding": "inplace",
+								"label": "uint256",
+								"numberOfBytes": "32"
+							}
+						}
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/BankAccount.sol": {
+				"ast": {
+					"absolutePath": "contracts/BankAccount.sol",
+					"exportedSymbols": {
+						"BankAccount": [
+							77
+						]
+					},
+					"id": 78,
+					"license": "GPL-3.0",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								">=",
+								"0.8",
+								".2",
+								"<",
+								"0.9",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "39:31:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "BankAccount",
+							"contractDependencies": [],
+							"contractKind": "contract",
+							"fullyImplemented": true,
+							"id": 77,
+							"linearizedBaseContracts": [
+								77
+							],
+							"name": "BankAccount",
+							"nameLocation": "83:11:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"anonymous": false,
+									"eventSelector": "36af321ec8d3c75236829c5317affd40ddb308863a1236d2d277a4025cccee1e",
+									"id": 11,
+									"name": "Deposit",
+									"nameLocation": "108:7:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 10,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 3,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "user",
+												"nameLocation": "132:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 11,
+												"src": "116:20:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 2,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "116:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 5,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "accountId",
+												"nameLocation": "151:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 11,
+												"src": "138:22:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 4,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "138:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 7,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "value",
+												"nameLocation": "167:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 11,
+												"src": "162:10:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 6,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "162:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 9,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "timestamp",
+												"nameLocation": "179:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 11,
+												"src": "174:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 8,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "174:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "115:74:0"
+									},
+									"src": "102:88:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "1f0d204a59639d21245dbaa239dfc9a6227aa86cb614bdda19843c52d155fcfa",
+									"id": 23,
+									"name": "WithdrawRequested",
+									"nameLocation": "202:17:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 22,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 13,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "user",
+												"nameLocation": "236:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 23,
+												"src": "220:20:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 12,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "220:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 15,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "accountId",
+												"nameLocation": "258:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 23,
+												"src": "242:25:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 14,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "242:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 17,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "withdrawId",
+												"nameLocation": "285:10:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 23,
+												"src": "269:26:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 16,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "269:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 19,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "amount",
+												"nameLocation": "305:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 23,
+												"src": "297:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 18,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "297:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 21,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "timestamp",
+												"nameLocation": "321:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 23,
+												"src": "313:17:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 20,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "313:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "219:112:0"
+									},
+									"src": "196:136:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "56ca301a9219608c91e7bcee90e083c19671d2cdcc96752c7af291cee5f9c8c8",
+									"id": 29,
+									"name": "Withdraw",
+									"nameLocation": "344:8:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 28,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 25,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "withdrawId",
+												"nameLocation": "367:10:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 29,
+												"src": "354:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 24,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "354:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 27,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "timestamp",
+												"nameLocation": "384:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 29,
+												"src": "379:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 26,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "379:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "353:41:0"
+									},
+									"src": "338:57:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "1dfea57c7217d8ee2ef44253419f3a05acdf0e6dea69f12e9e2afa2e748e3c8c",
+									"id": 38,
+									"name": "AccountCreated",
+									"nameLocation": "407:14:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 37,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 32,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "owners",
+												"nameLocation": "432:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 38,
+												"src": "422:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+													"typeString": "address[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 30,
+														"name": "address",
+														"nodeType": "ElementaryTypeName",
+														"src": "422:7:0",
+														"stateMutability": "nonpayable",
+														"typeDescriptions": {
+															"typeIdentifier": "t_address",
+															"typeString": "address"
+														}
+													},
+													"id": 31,
+													"nodeType": "ArrayTypeName",
+													"src": "422:9:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+														"typeString": "address[]"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 34,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "id",
+												"nameLocation": "453:2:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 38,
+												"src": "440:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 33,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "440:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 36,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "timestamp",
+												"nameLocation": "462:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 38,
+												"src": "457:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 35,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "457:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "421:51:0"
+									},
+									"src": "401:72:0"
+								},
+								{
+									"canonicalName": "BankAccount.WithdrawRequest",
+									"id": 51,
+									"members": [
+										{
+											"constant": false,
+											"id": 40,
+											"mutability": "mutable",
+											"name": "user",
+											"nameLocation": "523:4:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 51,
+											"src": "515:12:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address",
+												"typeString": "address"
+											},
+											"typeName": {
+												"id": 39,
+												"name": "address",
+												"nodeType": "ElementaryTypeName",
+												"src": "515:7:0",
+												"stateMutability": "nonpayable",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 42,
+											"mutability": "mutable",
+											"name": "amount",
+											"nameLocation": "543:6:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 51,
+											"src": "538:11:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 41,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "538:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 44,
+											"mutability": "mutable",
+											"name": "approvals",
+											"nameLocation": "565:9:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 51,
+											"src": "560:14:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 43,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "560:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 48,
+											"mutability": "mutable",
+											"name": "ownersApproved",
+											"nameLocation": "610:14:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 51,
+											"src": "585:39:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+												"typeString": "mapping(address => bool)"
+											},
+											"typeName": {
+												"id": 47,
+												"keyName": "",
+												"keyNameLocation": "-1:-1:-1",
+												"keyType": {
+													"id": 45,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "593:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"nodeType": "Mapping",
+												"src": "585:24:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+													"typeString": "mapping(address => bool)"
+												},
+												"valueName": "",
+												"valueNameLocation": "-1:-1:-1",
+												"valueType": {
+													"id": 46,
+													"name": "bool",
+													"nodeType": "ElementaryTypeName",
+													"src": "604:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bool",
+														"typeString": "bool"
+													}
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 50,
+											"mutability": "mutable",
+											"name": "approved",
+											"nameLocation": "640:8:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 51,
+											"src": "635:13:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_bool",
+												"typeString": "bool"
+											},
+											"typeName": {
+												"id": 49,
+												"name": "bool",
+												"nodeType": "ElementaryTypeName",
+												"src": "635:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bool",
+													"typeString": "bool"
+												}
+											},
+											"visibility": "internal"
+										}
+									],
+									"name": "WithdrawRequest",
+									"nameLocation": "488:15:0",
+									"nodeType": "StructDefinition",
+									"scope": 77,
+									"src": "481:175:0",
+									"visibility": "public"
+								},
+								{
+									"canonicalName": "BankAccount.Account",
+									"id": 62,
+									"members": [
+										{
+											"constant": false,
+											"id": 54,
+											"mutability": "mutable",
+											"name": "owners",
+											"nameLocation": "700:6:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 62,
+											"src": "690:16:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+												"typeString": "address[]"
+											},
+											"typeName": {
+												"baseType": {
+													"id": 52,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "690:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"id": 53,
+												"nodeType": "ArrayTypeName",
+												"src": "690:9:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+													"typeString": "address[]"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 56,
+											"mutability": "mutable",
+											"name": "balance",
+											"nameLocation": "722:7:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 62,
+											"src": "717:12:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 55,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "717:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 61,
+											"mutability": "mutable",
+											"name": "withdrawRequests",
+											"nameLocation": "773:16:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 62,
+											"src": "740:49:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_WithdrawRequest_$51_storage_$",
+												"typeString": "mapping(uint256 => struct BankAccount.WithdrawRequest)"
+											},
+											"typeName": {
+												"id": 60,
+												"keyName": "",
+												"keyNameLocation": "-1:-1:-1",
+												"keyType": {
+													"id": 57,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "748:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"nodeType": "Mapping",
+												"src": "740:32:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_WithdrawRequest_$51_storage_$",
+													"typeString": "mapping(uint256 => struct BankAccount.WithdrawRequest)"
+												},
+												"valueName": "",
+												"valueNameLocation": "-1:-1:-1",
+												"valueType": {
+													"id": 59,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 58,
+														"name": "WithdrawRequest",
+														"nameLocations": [
+															"756:15:0"
+														],
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 51,
+														"src": "756:15:0"
+													},
+													"referencedDeclaration": 51,
+													"src": "756:15:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_WithdrawRequest_$51_storage_ptr",
+														"typeString": "struct BankAccount.WithdrawRequest"
+													}
+												}
+											},
+											"visibility": "internal"
+										}
+									],
+									"name": "Account",
+									"nameLocation": "671:7:0",
+									"nodeType": "StructDefinition",
+									"scope": 77,
+									"src": "664:133:0",
+									"visibility": "public"
+								},
+								{
+									"constant": false,
+									"id": 67,
+									"mutability": "mutable",
+									"name": "account",
+									"nameLocation": "830:7:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 77,
+									"src": "805:32:0",
+									"stateVariable": true,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Account_$62_storage_$",
+										"typeString": "mapping(uint256 => struct BankAccount.Account)"
+									},
+									"typeName": {
+										"id": 66,
+										"keyName": "",
+										"keyNameLocation": "-1:-1:-1",
+										"keyType": {
+											"id": 63,
+											"name": "uint",
+											"nodeType": "ElementaryTypeName",
+											"src": "813:4:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											}
+										},
+										"nodeType": "Mapping",
+										"src": "805:24:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Account_$62_storage_$",
+											"typeString": "mapping(uint256 => struct BankAccount.Account)"
+										},
+										"valueName": "",
+										"valueNameLocation": "-1:-1:-1",
+										"valueType": {
+											"id": 65,
+											"nodeType": "UserDefinedTypeName",
+											"pathNode": {
+												"id": 64,
+												"name": "Account",
+												"nameLocations": [
+													"821:7:0"
+												],
+												"nodeType": "IdentifierPath",
+												"referencedDeclaration": 62,
+												"src": "821:7:0"
+											},
+											"referencedDeclaration": 62,
+											"src": "821:7:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_struct$_Account_$62_storage_ptr",
+												"typeString": "struct BankAccount.Account"
+											}
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 72,
+									"mutability": "mutable",
+									"name": "userAccounts",
+									"nameLocation": "871:12:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 77,
+									"src": "844:39:0",
+									"stateVariable": true,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_mapping$_t_address_$_t_array$_t_uint256_$dyn_storage_$",
+										"typeString": "mapping(address => uint256[])"
+									},
+									"typeName": {
+										"id": 71,
+										"keyName": "",
+										"keyNameLocation": "-1:-1:-1",
+										"keyType": {
+											"id": 68,
+											"name": "address",
+											"nodeType": "ElementaryTypeName",
+											"src": "852:7:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address",
+												"typeString": "address"
+											}
+										},
+										"nodeType": "Mapping",
+										"src": "844:26:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_mapping$_t_address_$_t_array$_t_uint256_$dyn_storage_$",
+											"typeString": "mapping(address => uint256[])"
+										},
+										"valueName": "",
+										"valueNameLocation": "-1:-1:-1",
+										"valueType": {
+											"baseType": {
+												"id": 69,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "863:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"id": 70,
+											"nodeType": "ArrayTypeName",
+											"src": "863:6:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+												"typeString": "uint256[]"
+											}
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 74,
+									"mutability": "mutable",
+									"name": "nextAccountId",
+									"nameLocation": "897:13:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 77,
+									"src": "892:18:0",
+									"stateVariable": true,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 73,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "892:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 76,
+									"mutability": "mutable",
+									"name": "nextWithdrawId",
+									"nameLocation": "922:14:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 77,
+									"src": "917:19:0",
+									"stateVariable": true,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 75,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "917:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"scope": 78,
+							"src": "74:866:0",
+							"usedErrors": [],
+							"usedEvents": [
+								11,
+								23,
+								29,
+								38
+							]
+						}
+					],
+					"src": "39:901:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
