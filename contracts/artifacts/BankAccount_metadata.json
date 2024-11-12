@@ -301,11 +301,11 @@
 	},
 	"sources": {
 		"contracts/BankAccount.sol": {
-			"keccak256": "0xa89cffc1e5d3a9dfb86164b2b6c282cf3ba37159371a84abb9f28fc36e083906",
+			"keccak256": "0x66e225ae56b389ef5edb3cc5f22cfbfd1c75ee55ad98baeb141d6e6522a16b85",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://8c148736a84b4735b6e750b3a8482fc5b8402fcc61cb0721e9a14395aca14571",
-				"dweb:/ipfs/QmTE5GRFBmqKJ6uYutKN2yRuUpK7XGrrckYwNtgEE6VKrv"
+				"bzz-raw://4c095afbfe40cf41513ec3e7d4d816e648fcad9b5cf846293544f77b4133dd5e",
+				"dweb:/ipfs/QmPmkNn9cM8fVrPNuKrXpCGLzb6unjsMFE5Cp3f6M3QH4R"
 			]
 		}
 	},

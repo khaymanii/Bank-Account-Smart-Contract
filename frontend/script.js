@@ -4,14 +4,14 @@ const abi = [
   "event Deposit(address indexed user, uint256 indexed accountId, uint256 value, uint256 timestamp)",
   "event Withdraw(uint256 indexed withdrawId, uint256 timestamp)",
   "event WithdrawRequested(address indexed user, uint256 indexed accountId, uint256 indexed withdrawId, uint256 amount, uint256 timestamp)",
-  "function approveWithdrawl(uint256 accountId, uint256 withdrawId)",
+  "function approveWithdrawal(uint256 accountId, uint256 withdrawId)",
   "function createAccount(address[] otherOwners)",
   "function deposit(uint256 accountId) payable",
   "function getAccounts() view returns (uint256[])",
   "function getApprovals(uint256 accountId, uint256 withdrawId) view returns (uint256)",
   "function getBalance(uint256 accountId) view returns (uint256)",
   "function getOwners(uint256 accountId) view returns (address[])",
-  "function requestWithdrawl(uint256 accountId, uint256 amount)",
+  "function requestWithdrawal(uint256 accountId, uint256 amount)",
   "function withdraw(uint256 accountId, uint256 withdrawId)",
 ];
 
